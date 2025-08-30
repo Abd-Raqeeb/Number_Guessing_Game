@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}} </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+      body{
+         background-color:#B2DF9B;
+      }
+      button:hover{
+        background-color:#9ABB50;
+      }
+    </style>
+  <body>
+   <div class="container d-flex   justify-content-center align-items-center col-lg-6 p-0">
+     <div class="container d-flex flex-column  justify-content-center align-items-center col-lg-12">
+        <h1 class="mt-5 mb-5 text-center col-12 col-sm-12 ">Guess Random Number</h1>
+
+        <div class="container h-100  d-flex justify-content-center align-items-center gap-4 mt-3 col-12 col-sm-12 ">
+
+           <div class="card w-50 col-6 col-sm-6 ">
+                <div class="card-body text-center col-12 col-sm-12 ">
+                    <h1 class="card-title">{{result}}  </h1>
+                    <p class="card-text ">Computer Guess</p>
+                </div>
+            </div>
+
+            <div class="card w-50 col-12 col-sm-12 ">
+                <div class="card-body text-center">
+                    <h1 class="card-title">{{user_guess}} </h1>
+                    <p class="card-text ">User Guess</p>
+                </div>
+            </div>
+           
+        </div
+        >
+        <form class="container  mb-5 col-12 col-sm-12 p-0" method="POST" action="{% url "GuessNumber" %}" >
+          {% csrf_token %}
+             <h5 class="mt-2 py-2  text-center border rounded  col-12 col-sm-12 bg-white">{{msg}} </h5>
+             {% if error  %}
+            <div class="alert alert-light py-1 col-12 col-sm-12 text-danger" role="alert">{{error}}  </div>
+            {% endif %}
+            <div class="input-group flex-nowrap col-12 col-sm-12 ">
+                <input type="text" name="user_guess" class="form-control input-group-sm col-12 col-sm-12" placeholder="Enter a Number between 1 to 50 " aria-label="Username" aria-describedby="addon-wrapping">
+            </div>
+
+            <button type="submit" class="btn btn-light mt-2 col-12 col-sm-12">Submit Guess</button>
+            <a href="{% url "refresh_back" %}" class="btn btn-light mt-2 col-12 col-sm-12" tabindex="-1" role="button">Reload</a>
+        </form>
+        <ul class="list-group mt-1 col-12 col-sm-12 ">
+          <li class="list-group-item ">1 . You need to guess a number between 1 and 50.</li>
+          <li class="list-group-item "><mark>Note:</mark> Enter numbers within the given range only, otherwise your guess will be considered invalid.</li>
+        </ul>
+    </div>
+   </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </body>
+</html>
